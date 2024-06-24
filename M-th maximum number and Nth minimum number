@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+// Function to swap two integers
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Function to perform selection sort in ascending order
+void selectionSort(int arr[], int n) {
+    int i, j, min_idx;
+
+    // Iterate through array
+    for (i = 0; i < n - 1; i++) {
+        // Find the minimum element in the unsorted array
+        min_idx = i;
+        for (j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        // Swap the found minimum element with the first element of the unsorted array
+        swap(&arr[min_idx], &arr[i]);
+    }
+}
+
+int main() {
+    int arr[] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3};  // Example array
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int m = 3;  // M-th maximum number
+    int n_min = 2;  // N-th minimum number
+
+    // Sort the array in ascending order
+    selectionSort(arr, n);
+
+    // Find M-th maximum number and N-th minimum number
+    int mth_max = arr[n - m];
+    int nth_min = arr[n_min - 1];
+
+    // Calculate sum and difference
+    int sum = mth_max + nth_min;
+    int difference = mth_max - nth_min;
+
+    // Output results
+    printf("M-th maximum number: %d\n", mth_max);
+    printf("N-th minimum number: %d\n", nth_min);
+    printf("Sum: %d\n", sum);
+    printf("Difference: %d\n", difference);
+
+    return 0;
+}
